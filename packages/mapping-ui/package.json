@@ -1,0 +1,23 @@
+{
+  "name": "@mngis/mapping-ui",
+  "version": "1.0.0",
+  "description": "Mapping UI utilities for the ArcGIS JavaScript API",
+  "author": "Caleb Mackey",
+  "license": "MIT",
+  "main": "./dist/cjs/mapping-ui.js",
+  "unpkg": "./dist/umd/mapping-ui.js",
+  "module": "./dist/esm/mapping-ui.js",
+  "js:next": "./dist/esm/mapping-ui.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build:cjs": "node ../../rollup_module --f=cjs",
+    "build:esm": "node ../../rollup_module --f=es",
+    "build:umd": "node ../../rollup_module --f=umd",
+    "build:iife": "node ../../rollup_module --f=iife",
+    "build": "rm -rf dist && npm run build:cjs && npm run build:esm && npm run build:umd && npm run build:iife",
+    "build-help": "rm -rf ../../docs/mapping-ui && jsdoc -c ./jsdoc.json -d ../../docs/mapping-ui/ --readme ./README.md"
+  },
+  "peerDependencies": {
+    "esri-loader": "*"
+  }
+}

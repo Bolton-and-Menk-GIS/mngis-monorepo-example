@@ -1,0 +1,24 @@
+{
+  "name": "@mngis/utils",
+  "version": "1.0.0",
+  "description": "General Utility functions",
+  "author": "Caleb Mackey",
+  "license": "MIT",
+  "main": "./dist/cjs/utils.js",
+  "unpkg": "./dist/umd/utils.js",
+  "module": "./dist/esm/utils.js",
+  "js:next": "./dist/esm/utils.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build:cjs": "node ../../rollup_module --f=cjs",
+    "build:esm": "node ../../rollup_module --f=es",
+    "build:umd": "node ../../rollup_module --f=umd",
+    "build:iife": "node ../../rollup_module --f=iife",
+    "build": "rm -rf dist && npm run build:cjs && npm run build:esm && npm run build:umd && npm run build:iife",
+    "build-help": "rm -rf ../../docs/utils && jsdoc -c ./jsdoc.json -d ../../docs/utils/ --readme ./README.md"
+  },
+  "types": "@types/index.d.ts",
+  "peerDependencies": {
+    "esri-loader": "*"
+  }
+}
