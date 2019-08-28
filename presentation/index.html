@@ -141,12 +141,7 @@
 										"license": "ISC",
 										"dependencies": {
 											"axios": "^0.19.0",
-											"brotli": "^1.3.2",
-											"docdash": "^1.0.3",
-											"esri-loader": "^2.10.0",
-											"fs": "^0.0.1-security",
-											"path": "^0.12.7",
-											"window": "^4.2.6"
+											"esri-loader": "^2.10.0"
 										},
 										"devDependencies": {
 											"@babel/cli": "^7.4.4",
@@ -157,6 +152,7 @@
 											"@babel/runtime": "^7.4.5",
 											"@babel/runtime-corejs2": "^7.4.5",
 											"chai": "^4.2.0",
+											"docdash": "^1.0.3",
 											"express": "^4.17.1",
 											"jsdoc": "^3.5.5",
 											"lerna": "^3.16.4",
@@ -178,7 +174,6 @@
 							</code></pre>
 						</section>
 
-
 				</section>
 
 				<!-- UNIT TESTS -->
@@ -187,6 +182,32 @@
 				<!-- DOCS -->
 
 				<!-- BUILDING AND PUBLISHING -->
+				<section id="building">
+					<section id="build-prod">
+						<h4>Building for Production</h4>
+						<ul>
+							<li class="fragment">when using es6 JavaScript, a module bundler needs to be used</li>
+							<li class="fragment"><a href="https://rollupjs.org/guide/en/" target="_blank">Rollup</a> is better suited for libraries, while <a href="https://webpack.js.org/" target="_blank">Webpack</a> is better for apps</li>
+							<ul>
+								<li class="fragment">both support plugins for tools such as <a href="https://babeljs.io/" target="_blank">Babel</a> and <a href="https://github.com/mishoo/UglifyJS2" target="_blank">Uglify</a></li>
+							</ul>
+							<li class="fragment"> </li>
+						</ul>
+					</section>
+
+					<section id="build-formats">
+						<h4>Build formats</h4>
+						<ul>
+							<li class="fragment">cjs – CommonJS, suitable for Node and other bundlers</li>
+							<li class="fragment">esm – Keep the bundle as an ES module file</li>
+							<li class="fragment">iife – A self-executing function, suitable for inclusion as a <span class="code-text">&lt;script&gt;</span> tag. (If you want to create a bundle for your application, you probably want to use this.)</li>
+							<li class="fragment">umd – Universal Module Definition, works as amd, cjs and iife all in one</li>
+							<li class="fragment">amd – Asynchronous Module Definition, used with module loaders like RequireJS</li>
+							<li class="fragment">system – Native format of the SystemJS loader</li>
+						</ul>
+					</section>
+
+				</section>
 
 				<!-- USING IN APPS -->
 			</div>

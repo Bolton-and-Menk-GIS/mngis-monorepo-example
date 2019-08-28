@@ -5,6 +5,10 @@
 .reveal li {font-size: 85%; }
 .reveal li li li li {font-size: 90%; }
 
+.reveal pre {
+  tab-size: 2 !important;
+}
+
 .reveal pre code{
   font-size: 0.8em !important;
   max-height: 490px !important;
