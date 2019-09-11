@@ -10,5 +10,18 @@
  * @property {number} [years] - number of years
  */
 export interface TimeDelta {
-  
+  /** number of seconds */
+  seconds?: number,
+  /** number of minutes */
+  minutes?: number,
+  /** number of hours */
+  hours?: number,
+  /** number of days */
+  days?: number,
+  /** number of weeks */
+  weeks?: number,
+  /** number of months */
+  months?: number,
+  /** number of years */
+  years?: number,
 }
