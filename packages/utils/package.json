@@ -9,7 +9,7 @@
   "module": "./dist/esm/utils.js",
   "js:next": "./dist/esm/utils.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "mocha",
     "build:cjs": "node ../../rollup_module --f=cjs",
     "build:esm": "node ../../rollup_module --f=es",
     "build:umd": "node ../../rollup_module --f=umd",

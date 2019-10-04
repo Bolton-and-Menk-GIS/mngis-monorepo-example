@@ -36,13 +36,12 @@
 				<section id="javascript-libraries">
 					
 					<section class="" id="js-libs">
-						<h4>What is Reusable Code?</h4>
-
+						<h4>Why Write JavaScript Libraries?</h4>
 							<ul>
-								<li class="fragment">Do you find yourself writing the same (or similar) code all the time in different apps?</li>
-								<ul>
-									<li class="fragment">if the answer is yes, those parts are good candidates to add to a library</li>
-								</ul>
+								<li class="fragment">Can modularize common tasks to work more effieciently, not reinventing the wheel with different apps.</li>
+								<li class="fragment">Create consistency between different apps by working with a common code base.</li>
+								<li class="fragment">Can choose to share them as open source, or use privately within your organization.</li>
+								<!-- <li class="fragment"></li> -->
 							</ul>
 
 					</section>
@@ -91,17 +90,23 @@
 								<li class="fragment">will create a <span class="code-text">lerna.json</span> file where you can specify the packages directory, version, and npm client (npm or yarn)</li>
 							</ul>
 							<li class="fragment">once some packages are created, run <span class="code-text">lerna bootstrap</span> to setup all dependencies and peer dependencies</li>
+							<li class="fragment">You can also target specific packages:</li>
+							<ul>
+								<li class="fragment"><span class="code-text">lerna run build --scope &lt;package-name&gt;</span></li>
+								<li class="fragment"><span class="code-text">lerna run test --scope {&lt;pkg1&gt;,&lt;pkg2&gt;}</span></li>
+							</ul>
 						</ul>
 					</section>
 
-					<section id="yarn-workspaces">
+					<section id="yarn-ws">
 						<h4>Using Yarn over NPM</h4>
 						<ul>
-							<li class="fragment">The decision to use <a>yarn</a> over npm as the package manager for lerna provides a huge advantage</li>
+							<li class="fragment">The decision to use <a>yarn</a> over <a href="https://www.npmjs.com/" target="_blank">npm</a> as the package manager for lerna provides a huge advantage</li>
 							<li class="fragment">You can use <a href="https://yarnpkg.com/lang/en/docs/workspaces/" target="_blank">yarn workspaces</a>!</li> 
 							<ul>
 								<li class="fragment">all packages will share <strong>one</strong> <span class="code-text">node_modules</span> folder!</li>
 								<li class="fragment">all packages are registered with the <span class="code-text">workspaces</span> property in the <span class="code-text">package.json</span> file</li>
+								<li class="fragment"><span class="code-text">yarn add esri-loader -W</span></li>
 							</ul>
 						</ul>
 					</section>
@@ -177,39 +182,245 @@
 				</section>
 
 				<!-- UNIT TESTS -->
-				<section>Slide 2</section>
+				<section id="unit-tests-section">
+					<section id="unit-tests">
+						<h4>Unit Testing</h4>
+						<ul>
+							<li class="fragment">Unit Tests are extremely valuable to make sure everything works when making changes in code.</li>
+							<li class="fragment">Thankfully, unit testing is fairly straightforward in JS with many options for libraries:</li>
+							<ul>
+								<li class="fragment"><a href="https://mochajs.org/" target="_blank">mocha</a></li>
+								<ul>
+									<li class="fragment">often used in conjunction with <a href="https://www.chaijs.com/" target="_blank">chai</a></li>
+								</ul>
+								<li class="fragment"><a href="https://jasmine.github.io/" target="_blank">jasmine</a></li>
+								<li class="fragment"><a href="https://github.com/avajs/ava" target="_blank">ava</a></li>
+								<li class="fragment"><a href="https://jestjs.io/" target="_blank">jest</a></li>
+								<li class="fragment"><a href="https://karma-runner.github.io/3.0/" target="_blank">karma</a></li>
+							</ul>
+						</ul>
+
+					</section>
+
+					<section id="mocha">
+						<h4>Unit Testing with Mocha and Chai</h4>
+						<ul>
+							<li class="fragment"><span class="code-text">mocha</span> provides a very declarative testing API that is easy to use and can perform effective testing.</li>
+							<li class="fragment">Also supports mocking to perform backend API tests</li>
+							<li class="fragment">Works well with Node.js debugger</li>
+						</ul>
+					</section>
+
+					<section id="mocha-example">
+						<h5>Mocha Example</h5>
+						<pre class="fragment"><code class="hljs js" data-trim>
+							const chai = require('chai');
+							const utils = require('@mngis/utils');
+							// destructure to get desired functions
+							const { expect } = chai;
+								
+							// getSeconds() unit-test
+							describe('#getSeconds()',function(){
+								context('with correct time params',function(){
+									it('should return correct time in seconds',function(){
+										const time = utils.getSeconds({days: 1, hours: 3, minutes: 30});
+										expect(time).to.equal(99000);
+									})
+								})
+							})
+						</code></pre>
+
+						<img src="./assets/mocha_test.png" class="fragment" alt="" style="margin-top: 1.5rem;">
+
+					</section>
+					
+				</section>
 
 				<!-- DOCS -->
+				<section id="docs-section">
+					<section id="docs">
+						<h4>Documenting Your Code</h4>
+						<ul>
+							<li class="fragment">Documenting your code can describe what the code is doing as well as define what parameters can be passed into functions and what will be returned.</li>
+							<li class="fragment">If code is documented properly, html based documentation can be generated automatically.</li>
+							<li class="fragment">One library that can generate docs from annotated code is <a href="https://github.com/jsdoc/jsdoc" target="_blank">JsDoc</a>.</li>
+							<ul>
+								<li class="fragment">You can even add code examples within the comments.</li>
+							</ul>
+						</ul>
+
+					</section>
+
+					<section id="jsdoc">
+						<h5>Documenting a Function</h5>
+						<img src="./assets/function.png" alt="" style="margin-top: 1.5rem;">
+					</section>
+
+					<section id="types">
+						<h6>TypeScript and <span class="code-text">typeDef</span>s</h6>
+						<ul>
+							<li class="fragment">If using TypeScript, you can create your own <a href="https://www.typescriptlang.org/docs/handbook/interfaces.html" target="_blank">interfaces</a> to define data structures and type checking.</li>
+							<ul>
+								<li class="fragment">should consider using <a href="https://typedoc.org/" target="_blank">TypeDoc</a> instead</li>
+							</ul>
+							<li class="fragment">However, it is still possible to get the documentation of expected types in JavaScript with special <span class="code-text">typeDef</span>comments.</li>
+							<li class="fragment">You can also add TypeScript support to projects by including <a href="https://www.typescriptlang.org/docs/handbook/declaration-files/introduction.html" target="_blank">type declaration files</a></li>
+						</ul>
+					</section>
+
+					<section id="typedef">
+						<h5>TypeDef Example</h5>
+						<img src="./assets/typedef.png" alt="">
+					</section>
+
+					<section id="typedef-doc">
+						<img src="./assets/typedefDoc.png" alt="">
+					</section>
+
+				</section>
+
+				<!-- working with the ArcGIS JavaScript API -->
+				<section id="arcgis">
+					<section id="esri-loader">
+						<h5>Working with the ArcGIS JavaScript API</h5>
+						<ul>
+							<li class="fragment">Because the ArcGIS JavaScript API is built on <a href="https://dojotoolkit.org/reference-guide/1.10/loader/amd.html" target="_blank">Dojo's legacy AMD loader</a>, you cannot simply <span class="code-text">npm install</span> the js api or <span class="code-text">import</span> (unless you are using TypeScript).</li>
+							<li class="fragment">To get around this, you can use the <a href="https://github.com/Esri/esri-loader" target="_blank">esri-loader</a> library to load modules</li>
+						</ul>
+					</section>
+
+					<section id="esri-loader-ex">
+						<h6>Creating a package that uses <span class="code-text">esri-loader</span></h6>
+						<pre><code class="hljs js" data-trim>
+								import { loadModules } from 'esri-loader';
+								
+								const widgets = {};
+								
+								// set a ready Promise that will resolve when the 
+								// ArcGIS JS API modules have been loaded
+								widgets.ready = new Promise(async (resolve, reject) => {
+								
+									const [ Expand, BasemapGallery, BasemapToggle ] = await loadModules([
+										'esri/widgets/Expand', 
+										'esri/widgets/BasemapGallery', 
+										'esri/widgets/BasemapToggle',
+									]);
+									
+									widgets.addBasemapGallery = function(){
+										// do stuff
+									}
+								
+									widgets.addBasemapToggler = function(){
+										// do stuff
+									}
+								})
+								
+								export default widgets;
+						</code></pre>
+					</section>
+
+					<section>
+						<h5>Wait for the <span class="code-text">esri-loader</span></h5>
+						<pre><code class="hljs js" data-trim>
+							import { widgets } from '@mngis/mapping-ui';
+
+							async function addWidget(){
+								// wait for the esri-loader to resolve
+								await widgets.ready;
+
+								// now that it is loaded, it is safe to call functions
+								widgets.addBasemapToggler();
+							}
+						</code></pre>
+					</section>
+
+				</section>
 
 				<!-- BUILDING AND PUBLISHING -->
 				<section id="building">
 					<section id="build-prod">
 						<h4>Building for Production</h4>
 						<ul>
-							<li class="fragment">when using es6 JavaScript, a module bundler needs to be used</li>
+							<li class="fragment">when using es6 JavaScript, a module bundler needs to be used to transpile code down to es5 so it can be interpreted by all browsers.</li>
 							<li class="fragment"><a href="https://rollupjs.org/guide/en/" target="_blank">Rollup</a> is better suited for libraries, while <a href="https://webpack.js.org/" target="_blank">Webpack</a> is better for apps</li>
 							<ul>
 								<li class="fragment">both support plugins for tools such as <a href="https://babeljs.io/" target="_blank">Babel</a> and <a href="https://github.com/mishoo/UglifyJS2" target="_blank">Uglify</a></li>
 							</ul>
-							<li class="fragment"> </li>
+							<li class="fragment">You can <span class="code-text">hoist</span> modules that will should be installed as <span class="code-text">peerDependencies</span> with the package.</li>
 						</ul>
 					</section>
 
 					<section id="build-formats">
 						<h4>Build formats</h4>
 						<ul>
-							<li class="fragment">cjs – CommonJS, suitable for Node and other bundlers</li>
-							<li class="fragment">esm – Keep the bundle as an ES module file</li>
-							<li class="fragment">iife – A self-executing function, suitable for inclusion as a <span class="code-text">&lt;script&gt;</span> tag. (If you want to create a bundle for your application, you probably want to use this.)</li>
-							<li class="fragment">umd – Universal Module Definition, works as amd, cjs and iife all in one</li>
-							<li class="fragment">amd – Asynchronous Module Definition, used with module loaders like RequireJS</li>
-							<li class="fragment">system – Native format of the SystemJS loader</li>
+							<li class="fragment"><span class="code-text">cjs</span> – CommonJS, suitable for Node and other bundlers</li>
+							<li class="fragment"><span class="code-text">esm</span> – Keep the bundle as an ES module file</li>
+							<li class="fragment"><span class="code-text">iife</span> – A self-executing function, suitable for inclusion as a <span class="code-text">&lt;script&gt;</span> tag. (If you want to create a bundle for your application, you probably want to use this.)</li>
+							<li class="fragment"><span class="code-text">umd</span> – Universal Module Definition, works as amd, cjs and iife all in one</li>
+							<li class="fragment"><span class="code-text">amd</span> – Asynchronous Module Definition, used with module loaders like RequireJS</li>
+							<li class="fragment"><span class="code-text">system</span> – Native format of the SystemJS loader</li>
 						</ul>
+					</section>
+
+					<section id="mod-package">
+						<h5>Example <span class="code-text">package.json</span></h5>
+						<pre><code class="hljs json" data-trim>
+							{
+								"name": "@mngis/utils",
+								"version": "1.0.0",
+								"description": "General Utility functions",
+								"author": "Caleb Mackey",
+								"license": "MIT",
+								"main": "./dist/cjs/utils.js",
+								"unpkg": "./dist/umd/utils.js",
+								"module": "./dist/esm/utils.js",
+								"js:next": "./dist/esm/utils.js",
+								"scripts": {
+									"test": "mocha",
+									"build:cjs": "node ../../rollup_module --f=cjs",
+									"build:esm": "node ../../rollup_module --f=es",
+									"build:umd": "node ../../rollup_module --f=umd",
+									"build:iife": "node ../../rollup_module --f=iife",
+									"build": "rm -rf dist && npm run build:cjs && npm run build:esm && npm run build:umd && npm run build:iife",
+									"build-help": "rm -rf ../../docs/utils && jsdoc -c ./jsdoc.json -d ../../docs/utils/ --readme ./README.md"
+								},
+								"types": "@types/index.d.ts",
+								"peerDependencies": {
+									"esri-loader": "*"
+								}
+							}
+						</code></pre>
 					</section>
 
 				</section>
 
 				<!-- USING IN APPS -->
+				<section id="usage-section">
+					<section id="usage">
+						<h6>Usage in Apps</h6>
+						<ul>
+							<li class="fragment">If you publish the libraries to <span class="code-text">npm</span>, you can simply <span class="code-text">npm install</span> or <span class="code-text">yarn add</span></li>
+							<li class="fragment">However, for private repos, there are other options:</li>
+							<ul>
+								<li class="fragment">install from github repo:<br><span class="code-text" style="font-size: 0.8rem;">npm install git+https://git@github.com/&lt;your-account&gt;/&lt;your-repo&gt;.git</span></li>
+								<li class="fragment"><a href="https://docs.npmjs.com/cli/link.html" target="_blank">symlink</a> from relative/absolute paths<br/><span class="code-text" style="font-size: 0.8rem;">npm link ../../local-repo/packages/package</span></li>
+							</ul>
+						</ul>
+					</section>
+				</section>
+
+				<section id="app-demo">
+					<h5>Demo App</h5>
+				</section>
+
+				<section id="questions">
+					<h3>Questions?</h3>
+
+					<div style="margin-top: 2rem; font-size: 1.5rem !important;">
+						<a href="mailto:Caleb.Mackey@bolton-menk.com" target="_blank">Caleb.Mackey@bolton-menk.com</a>
+					</div>
+				</section>
+
 			</div>
 		</div>
 
