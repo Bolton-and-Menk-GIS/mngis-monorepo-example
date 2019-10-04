@@ -19,9 +19,6 @@ function getArgs() {
     else if (arg[0] === "-") {
       const flags = arg.slice(1, arg.length);
       args[flags] = true;
-      // flags.forEach(flag => {
-      //   args[flag] = true;
-      // });
     }
   });
   return args;
@@ -30,35 +27,21 @@ function getArgs() {
 async function build({ inputOptions = {}, outputOptions = {} } = {}) {
   // create a bundle
   const bundle = await rollup.rollup(inputOptions);
-  // console.log('INPUTS:\n', inputOptions);
 
   // or write the bundle to disk
   await bundle.write(outputOptions);
-  // console.log('OUTPUTS:\n', outputOptions)
 }
 
 // get args
 const args = getArgs();
-// console.log(args)
 const format = args.f || "cjs";
-// const dropConsole = args.strip === undefined ? true: args.strip;
-
 
 // get config
 const options = getConfig(format);
-// if (dropConsole){
-//   options.inputOptions.plugins.unshift(strip({
-//     debugger: true,
-//     functions: ['console.log', 'debug', 'assert.*'],
-//     sourceMap: false
-//   }))
-// }
 
 if (format !== "es") {
   options.inputOptions.plugins.push(uglify.uglify());
 }
-
-// console.log(options.inputOptions)
 
 // check for gzip and brotli
 if (args.g) {
@@ -69,8 +52,6 @@ if (args.g) {
     : null;
   options.inputOptions.plugins.push(gzipPlugin(opts));
 }
-
-// console.log("OPTIONS FOR BUILD: ", options);
 
 // do rollup build
 build(options);

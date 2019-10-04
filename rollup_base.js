@@ -83,9 +83,6 @@ const getConfig = format => {
       json(),
       resolve({
         mainFields: ['main', 'module', 'browser', 'jsnext']
-        // jsnext: true,
-        // main: true,
-        // browser: true
       }),
       commonjs(),
       babel({
@@ -122,7 +119,6 @@ const getConfig = format => {
     inputOptions: options,
     outputOptions: {
       extend: browserFriendly, // causes this module to extend the global specified by `moduleName`
-      // name: browserFriendly ? moduleName : name,
       name: browserFriendly? moduleName + toTitleCase(name.replace("@mngis/", "")): name,
       file: outfile,
       format: format,
