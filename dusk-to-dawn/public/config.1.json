@@ -1,0 +1,120 @@
+{
+  "app": {
+    "title": "From Dusk to Dawn",
+    "version": 1.0
+  },
+  "api": {
+    "sunrise": {
+      
+      "url": "https://api.sunrise-sunset.org/json"
+    },
+    "timezone": {
+      "url": "http://api.timezonedb.com/v2.1/get-time-zone",
+      "apiKey": "OIWBAA0COSO6"
+    }
+  },
+  "map": {
+    "placeNameField": "areaname",
+    "widgets": {
+      "basemap": {
+        "type": "toggle",
+        "position": "bottom-right",
+        "maps": ["topo", "hybrid", "osm", "dark-gray-vector", "streets-night-vector"],
+        "options": {
+        }
+      },
+      "search": {
+        "position": "top-right"
+      }
+    },
+    "selectionSymbol": {
+      "type": "simple-marker",
+      "outline": { "color": [230, 0, 0, 1] },
+      "size": 15,
+      "color": [230, 0, 0, 0.97]
+    },
+
+    "mapImage": {
+      "url": "https://sampleserver6.arcgisonline.com/arcgis/rest/services/USA/MapServer",
+      "sublayers": [{
+        "id": 0,
+        "title": "cities",
+        "minScale": 7000000,
+        "definitionExpression": "pop2000 >= 10000",
+        "popupEnabled": true,
+        "popupTemplate": {
+          "outFields": ["areaname", "pop2000"],
+          "title": "City: {areaname}"
+          
+        },
+        "renderer": {
+          "type": "class-breaks",
+          "field": "POP2000",
+          "classBreakInfos": [
+            {
+              "minValue": 10000,
+              "maxValue": 20000,
+              "symbol": { 
+                "type": "simple-marker", 
+                "size": 5, 
+                "color": [194, 194, 194, 0.13] 
+              }
+            }, {
+              "minValue": 20000,
+              "maxValue": 50000,
+              "symbol": { 
+                "type": "simple-marker", 
+                "size": 8, 
+                "color": [194, 194, 194, 0.15] 
+              }
+            },  {
+              "minValue": 50000,
+              "maxValue": 150000,
+              "symbol": { 
+                "type": "simple-marker", 
+                "size": 11, 
+                "color": [230, 152, 0, 0.25] 
+              }
+            }, {
+              "minValue": 150000,
+              "maxValue": 1000000,
+              "symbol": { 
+                "type": "simple-marker", 
+                "size": 16, 
+                "color": [255, 85, 0, 0.5] 
+              }
+            }, {
+              "minValue": 1000000,
+              "maxValue": 10000000,
+              "symbol": { 
+                "type": "simple-marker", 
+                "size": 20, 
+                "color": [255, 85, 0, 0.75] 
+              }
+            }
+          ]
+        }
+      }, {
+        "id": 2,
+        "renderer": {
+          "type": "simple",
+          "symbol": {
+            "type": "simple-fill", 
+            "style": "none",
+            "outline": {
+              "width": 1,
+              "color": "gray"
+            }
+          }
+        }
+      }
+    ],
+      
+      "webScene": {
+        "portalItem": {
+          "id": "7d665be60b8f4ead9569f26933f22117"
+        }
+      }
+    }
+  }
+}
